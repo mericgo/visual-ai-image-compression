@@ -1,153 +1,77 @@
-📦 Visual AI Image Compression
+# Visual AI – Image Compression with Autoencoders
 
-Autoencoder vs JPEG Comparison
+This project implements an image compression system using a convolutional autoencoder trained on the CIFAR-10 dataset. The goal is to learn compact latent representations of images and compare deep learning–based compression performance against traditional JPEG compression.
 
-📌 Project Overview
+## 🚀 Project Overview
 
-This project explores deep learning–based image compression using a Convolutional Autoencoder, and compares its performance against traditional JPEG compression.
+- Images are compressed into a low-dimensional latent space using a CNN-based autoencoder.
+- The reconstructed images are evaluated and compared with JPEG-compressed images.
+- Performance is measured using **MSE (Mean Squared Error)** and **PSNR (Peak Signal-to-Noise Ratio)**.
 
-The goal is to analyze how well a neural network can compress and reconstruct images while preserving visual quality, using PSNR (Peak Signal-to-Noise Ratio) as the evaluation metric.
+## 🧠 Model Architecture
 
-The project is implemented with PyTorch and trained/tested on the CIFAR-10 dataset.
+The autoencoder consists of:
+- **Encoder:** Convolutional layers that downsample the input image into a compact latent vector.
+- **Latent Space:** Controls the compression rate.
+- **Decoder:** Transposed convolutions that reconstruct the image from the latent vector.
 
-🧠 Key Concepts
+## 📊 Dataset
 
-Convolutional Autoencoders
+- **CIFAR-10**
+- Image size: 32×32 RGB
+- 60,000 images (50,000 training / 10,000 test)
 
-Learned image compression
+## ⚙️ Technologies Used
 
-Latent space representation
+- Python 3
+- PyTorch
+- Torchvision
+- NumPy
+- Matplotlib
+- TQDM
 
-JPEG compression baseline
+## 🏋️ Training
 
-PSNR quality metric
+Train the autoencoder using:
 
-Visual comparison of reconstructions
-
-visual-ai-image-compression/
-│
-├── config.py                    # Global configuration (device, image size, latent dim)
-├── model.py                     # CompressionAutoEncoder architecture
-├── train.py                     # Autoencoder training script
-├── jpeg_vs_autoencoder.py       # JPEG vs Autoencoder comparison & visualization
-├── metrics.py                   # PSNR metric
-├── compression_autoencoder.pth  # Trained model weights
-├── data/                        # CIFAR-10 dataset
-└── README.md
-
-
-
-🏗️ Autoencoder Architecture
-
-Encoder
-
-3× Convolution layers (stride=2)
-
-ReLU activations
-
-Fully connected layer → Latent vector (compression)
-
-Decoder
-
-Fully connected layer
-
-Transposed convolutions
-
-Sigmoid output for normalized image reconstruction
-
-The latent vector represents the compressed image representation.
-
-📊 Compression Comparison
-
-The project compares:
-
-Method	Description
-JPEG	Standard lossy image compression (PIL)
-Autoencoder	Learned compression via latent space
-
-Evaluation metric:
-
-PSNR (Peak Signal-to-Noise Ratio)
-
-Higher PSNR → better reconstruction quality.
-
-🖼️ Example Output
-
-Each experiment displays:
-
-Original Image
-
-JPEG-compressed image (with PSNR)
-
-Autoencoder-reconstructed image (with PSNR)
-
-This allows both numerical and visual comparison.
-
-🚀 How to Run
-1️⃣ Create Virtual Environment (Optional)
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-2️⃣ Install Dependencies
-pip install torch torchvision matplotlib pillow
-
-3️⃣ Train the Autoencoder
+```bash
 python train.py
 
 
-This will generate:
+To compare JPEG compression with the autoencoder:
 
-compression_autoencoder.pth
-
-4️⃣ Compare JPEG vs Autoencoder
 python jpeg_vs_autoencoder.py
 
-⚙️ Configuration
 
-Edit config.py to experiment with:
+This script:
 
-LATENT_DIM = 128      # Compression strength
-IMAGE_SIZE = 128
-DEVICE = "cuda" or "cpu"
+Compresses images using JPEG
+
+Compresses images using the trained autoencoder
+
+Compares reconstruction quality using MSE and PSNR
 
 
-Lower latent dimensions = higher compression, lower quality.
 
-💡 Results & Insights
 
-Autoencoders can outperform JPEG in certain visual details
+visual-ai-image-compression/
+│
+├── config.py
+├── dataset.py
+├── model.py
+├── train.py
+├── jpeg_vs_autoencoder.py
+├── utils.py
+├── requirements.txt
+└── README.md
 
-Learned compression adapts to dataset characteristics
 
-Latent space size strongly affects reconstruction quality
+📈 Results
 
-Visual artifacts differ significantly between JPEG and neural compression
+The autoencoder demonstrates competitive performance compared to JPEG compression at similar compression levels, showing the potential of deep learning–based approaches for image compression tasks.
 
-🧪 Future Improvements
 
-Compression ratio vs PSNR plots
 
-SSIM metric support
-
-Larger datasets (ImageNet)
-
-Variational Autoencoder (VAE)
-
-Learned entropy coding
-
-🧑‍💻 Author
+✨ Author
 
 Meriç Yıldırım
-Visual AI • Deep Learning • Computer Vision
-
-⭐ Why This Project Matters
-
-This project demonstrates:
-
-Practical understanding of deep learning fundamentals
-
-Ability to compare classical vs learned methods
-
-Hands-on experience with computer vision pipelines
-
-Research-oriented thinking
